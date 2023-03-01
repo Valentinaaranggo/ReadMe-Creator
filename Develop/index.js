@@ -1,5 +1,7 @@
 const inquirer = require('inquirer')
 const fs = require('fs');
+const markDown= require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 
 
@@ -55,46 +57,6 @@ const questions = [
           },
 ];
 
-const generateReadMe = ({ username, email, title, description,license, dependencies, tests, usage, contribute  }) =>
-  `# ${title}
-
-  ## Description
-  
-  ${description}
-
-  ## Table of Contents
-
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Contributing](#contributing)
-  * [Tests](#tests)
-  * [Questions](#questions)
-  ## Installation
-  
- To install necessary dependancies, run the following command:
-
- \`\`\`
- ${dependencies}
- \`\`\`
-  ## Usage
-  
-  ${usage}
-  
-  ## Contributing
-  
-  ${contribute}
-  
-  ## Tests
-
-  To run tests, run the following command:
-
- \`\`\`
- ${tests}
- \`\`\`
-  ## Questions
-  
-  If you have any questions about the repo, open an issue or contact me directly at ${email}.
-  You can find more of my work at [${username}](https://github.com/${username}/).`;
 
 
 // TODO: Create a function to write README file
@@ -111,7 +73,7 @@ function init() {
     inquirer
     .prompt(questions)
     .then((answers)=>{
-     const readMeFile= generateReadMe(answers);
+     const readMeFile= generateMarkdown(answers);
      writeToFile('README.md',readMeFile);
     });
 }
